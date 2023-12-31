@@ -1,0 +1,37 @@
+# MKDOCS navigation structure and configuration
+---
+site_name: Network Automation
+docs_dir: docs
+site_dir: _html
+repo_url: https://github.com/ipspace/netops-labs
+site_url: https://ipspace.github.io/netops-labs/
+site_description: Hands-On Assignments for the Building Network Automation Solutions Online Course
+site_author: Ivan Pepelnjak, ipSpace.net AG
+copyright: (C) 2023 Ivan Pepelnjak (ipSpace.net AG)
+plugins:
+- search
+nav:
+- Home: index.md
+- Challenges:
+  - EX-Build_Lab.md
+  - EX-Create_Summary_Reports.md
+  - EX-Create_Service_Data_Model.md
+  - EX-Deploy_Network_Services.md
+  - EX-Logging_Testing.md
+- Extra:
+  - EX-Git_Recipe_Explained.md
+
+markdown_extensions:
+- footnotes
+- abbr
+- def_list
+- admonition
+- attr_list
+- sane_lists
+- smarty
+- nl2br
+
+theme:
+  name: mkdocs
+  custom_dir: _mkdocs_theme
+  navigation_depth: 3
