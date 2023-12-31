@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <meta name="author" content="Ivan Pepelnjak, ipSpace.net AG">
+        <link rel="canonical" href="https://ipspace.github.io/netops-labs/EX-Create_Service_Data_Model/">
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Data Models: Create a Service Data Model - Network Automation</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">Network Automation</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="navitem">
+                                <a href=".." class="nav-link">Home</a>
+                            </li>
+                            <li class="dropdown active">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Challenges <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../EX-Build_Lab/" class="dropdown-item">Build Your Own Network Automation Lab</a>
+</li>
+                                    
+<li>
+    <a href="../EX-Create_Summary_Reports/" class="dropdown-item">Easy Wins: Create Summary Reports</a>
+</li>
+                                    
+<li>
+    <a href="./" class="dropdown-item active">Data Models: Create a Service Data Model</a>
+</li>
+                                    
+<li>
+    <a href="../EX-Deploy_Network_Services/" class="dropdown-item">Deploy Network Services From a Data Model</a>
+</li>
+                                    
+<li>
+    <a href="../EX-Logging_Testing/" class="dropdown-item">Logging and Testing</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Extra <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../EX-Git_Recipe_Explained/" class="dropdown-item">Git Recipe Explained</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../EX-Create_Summary_Reports/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../EX-Deploy_Network_Services/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3">
+<div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+  <div class="navbar-header">
+      <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+          <span class="fa fa-angle-down"></span>
+      </button>
+  </div>
+
+  
+  
+  
+  
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary"  style="margin-bottom: 1em;">
+      <ul class="nav flex-column">
+          
+      <li class="nav-item" data-level="1"><a href="#data-models-create-a-service-data-model" class="nav-link">Data Models: Create a Service Data Model</a>
+        <ul class="nav flex-column">
+      <li class="nav-item" data-level="2"><a href="#select-the-data-stores" class="nav-link">Select the Data Store(s)</a>
+        <ul class="nav flex-column">
+        </ul>
+      </li>
+      <li class="nav-item" data-level="2"><a href="#abstract-the-data-models" class="nav-link">Abstract the Data Models</a>
+        <ul class="nav flex-column">
+        </ul>
+      </li>
+      <li class="nav-item" data-level="2"><a href="#sample-data-models" class="nav-link">Sample Data Models</a>
+        <ul class="nav flex-column">
+        </ul>
+      </li>
+      <li class="nav-item" data-level="2"><a href="#documentation" class="nav-link">Documentation</a>
+        <ul class="nav flex-column">
+        </ul>
+      </li>
+      <li class="nav-item" data-level="2"><a href="#validate-the-data-model" class="nav-link">Validate the Data Model</a>
+        <ul class="nav flex-column">
+        </ul>
+      </li>
+      <li class="nav-item" data-level="2"><a href="#more-information" class="nav-link">More information</a>
+        <ul class="nav flex-column">
+        </ul>
+      </li>
+        </ul>
+      </li>
+      </ul>
+    </div>
+  
+  
+  <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+    <ul class="nav flex-column">
+        
+    
+        
+    
+    <li class="nav-item" data-level="">
+      
+        <a class="nav-link">Challenges</a>
+      
+      
+        <ul class="nav flex-column">
+    
+    <li class="nav-item" data-level="">
+      
+        <a href="../EX-Build_Lab/" class="nav-link">Build Your Own Network Automation Lab</a>
+      
+      
+    </li>
+    
+    
+    <li class="nav-item" data-level="">
+      
+        <a href="../EX-Create_Summary_Reports/" class="nav-link">Easy Wins: Create Summary Reports</a>
+      
+      
+    </li>
+    
+    
+    <li class="nav-item" data-level="">
+      
+        <a href="./" class="nav-link">Data Models: Create a Service Data Model</a>
+      
+      
+    </li>
+    
+    
+    <li class="nav-item" data-level="">
+      
+        <a href="../EX-Deploy_Network_Services/" class="nav-link">Deploy Network Services From a Data Model</a>
+      
+      
+    </li>
+    
+    
+    <li class="nav-item" data-level="">
+      
+        <a href="../EX-Logging_Testing/" class="nav-link">Logging and Testing</a>
+      
+      
+    </li>
+    
+        </ul>
+      
+    </li>
+    
+        
+    
+    <li class="nav-item" data-level="">
+      
+        <a class="nav-link">Extra</a>
+      
+      
+        <ul class="nav flex-column">
+    
+    <li class="nav-item" data-level="">
+      
+        <a href="../EX-Git_Recipe_Explained/" class="nav-link">Git Recipe Explained</a>
+      
+      
+    </li>
+    
+        </ul>
+      
+    </li>
+    
+    </ul>
+  </div>
+
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="data-models-create-a-service-data-model">Data Models: Create a Service Data Model</h1>
+<p>In the hands-on part of the <a href="https://my.ipspace.net/bin/list?id=NetAutSol&amp;module=3"><em>Data Models</em></a> module, you’ll build a comprehensive set of data models describing your devices, network infrastructure, and a sample service.</p>
+<p>To build the data model, start by listing the attributes you need to describe:</p>
+<ul>
+<li>Your nodes (device name, loopback IP address…)</li>
+<li>Common network parameters (usernames, standard servers…)</li>
+<li>Infrastructure (links, routing protocols…)</li>
+<li>Service you want to model (customers, ports, port parameters, service parameters…).</li>
+</ul>
+<p>You can build a data model for any network infrastructure and service you like. Here are a few examples:</p>
+<ul>
+<li>Internet access service;</li>
+<li>Managed IPsec VPN service;</li>
+<li>Managed firewall service (or firewall access lists);</li>
+<li>VLANs across a data center fabric (implemented with VXLAN, EVPN+VXLAN, TRILL, FabricPath…)</li>
+<li>L2VPN or L3VPN service across an MPLS-enabled IP core.</li>
+</ul>
+<h2 id="select-the-data-stores">Select the Data Store(s)</h2>
+<p>After grouping the attributes into these four categories, decide how to represent these parameters and where to store them. For example:</p>
+<ul>
+<li>Node-specific parameters will be stored in per-node YAML files in the <strong>host_vars</strong> directory. Alternatively, store all node-specific parameters in a single <strong>nodes.yml</strong> file.</li>
+<li>Common network parameters will be stored in the <strong>group_vars/all.yml</strong> file… or you could store them in the <strong>network.yml</strong> file and include variables from that file into your playbook.</li>
+<li>Infrastructure parameters will be stored in the <strong>fabric.yml</strong> file.</li>
+<li>The service model will be stored in the <strong>services.yml</strong> file.</li>
+</ul>
+<h2 id="abstract-the-data-models">Abstract the Data Models</h2>
+<p>Try to make the infrastructure and service data models as simple as possible and hide the underlying network complexity in the <em>business logic</em> (configuration templates).</p>
+<p>For example:</p>
+<ul>
+<li>Define links in your network, not individual ports on devices;</li>
+<li>Define IP prefixes on links (or use unnumbered links), not IP addresses on device ports;</li>
+<li>If you’re running a single routing protocol in your network, don’t specify routing protocol parameters in the data model unless absolutely necessary.</li>
+</ul>
+<p>Likewise, the service data model should be service-oriented rather than device-oriented. For example:</p>
+<ul>
+<li>Don’t specify transport technologies (for example, VXLAN or DMVPN) in the service definition.</li>
+<li>Specify each service as a list of devices and ports on which that service should be configured, plus a few service-specific parameters (service name, VLAN ID, MPLS/VPN RT/RD…).</li>
+</ul>
+<h2 id="sample-data-models">Sample Data Models</h2>
+<p>You’ll find sample infrastructure- and service data models in:</p>
+<ul>
+<li><a href="https://blog.ipspace.net/kb/DataModels/">Network Automation Data Model Optimization</a></li>
+<li><em>Abstract everything</em> section of <a href="https://my.ipspace.net/bin/list?id=NetAutUC">Network Automation Use Cases</a> webinar;</li>
+<li>David Barroso’s <a href="https://github.com/dravetech/network-tutorials">Network Tutorials</a> and <a href="https://github.com/dbarrosop/ansible_demo">Ansible Demo</a> repositories;</li>
+<li><a href="https://github.com/ipspace/ansible-examples/tree/master/DHCP-Pools">DHCP Pools</a> example (simple data store used to create local DHCP pools on Cisco IOS routers)</li>
+<li><a href="https://github.com/ipspace/ansible-examples/tree/master/OSPF-Deployment">OSPF Deployment</a> - fabric data model with LLDP validation and fabric-to-node translation;</li>
+<li><a href="https://github.com/ipspace/MPLS-infrastructure">MPLS Infrastructure</a> - full-blown fabric- and services data models with OSPF, BGP, and MPLS/VPN deployment;</li>
+<li><a href="https://github.com/ipspace/VLAN-service">VLAN service deployment</a> - complete service deployment solution using a service data model to describe customer connectivity needs (= VLANs).</li>
+</ul>
+<h2 id="documentation">Documentation</h2>
+<p>Describe your data model (attributes, required values…) in a text file, and include that text file in your GitHub repository. It doesn’t matter how you describe your data model – the description must be concise enough to enable someone else to add new nodes, infrastructure components (links), or services.</p>
+<p>Sample data model descriptions are included with these examples:</p>
+<ul>
+<li><a href="https://github.com/ipspace/ansible-examples/tree/master/DHCP-Pools">Manage DHCP pools</a></li>
+<li><a href="https://github.com/ipspace/MPLS-infrastructure/">Deploy IGP+BGP routing in a multi-AS MPLS/VPN network</a></li>
+</ul>
+<h2 id="validate-the-data-model">Validate the Data Model</h2>
+<p>Build simple Jinja2 templates that will generate relevant parts of device configurations from your data model to verify that you’ve included all pertinent parameters or that they’re easy to derive from the data in the data model.</p>
+<p>For example, it’s easy to generate node IP addresses if your data model includes infrastructure links defined like this – the left node gets the first IP address in the subnet, and the right node gets the second IP address.</p>
+<pre><code>- left: E1
+  left_port: GigabitEthernet0/2
+  right: E2
+  right_port: GigabitEthernet0/2,
+  subnet: 10.0.0.20/30
+  cost: 5
+</code></pre>
+<p>Sometimes, you might figure out that working with your data model in the configuration templates is hard. In that case, it might be better to insert an extra step and transform your service-oriented data model into a node-oriented one.</p>
+<h2 id="more-information">More information</h2>
+<p>You’ll find several useful Jinja2 templates that work with abstracted infrastructure and services data models in David Barroso’s <a href="https://github.com/dravetech/network-tutorials">Network Tutorials</a> and <a href="https://github.com/dbarrosop/ansible_demo">Ansible Demo</a> repositories;</p>
+<p>These documents will help you transform your data model:</p>
+<ul>
+<li><a href="https://my.ipspace.net/bin/get/NetAutSol/DOC-Data_Munging_Ansible_Jinja2.md">Data munging with Ansible and Jinja2</a></li>
+<li>Playbooks in the <a href="https://github.com/ipspace/MPLS-infrastructure">MPLS Infrastucture</a> and <a href="https://github.com/ipspace/VLAN-service">VLAN Service</a> repositories (use <a href="https://github.com/ipspace/VLAN-service/tree/VLAN_Data_Model">this URL</a> to get the simplest version of the VLAN services project that includes data model transformation)</li>
+<li><a href="https://github.com/ipspace/ansible-examples/tree/master/OSPF-Deployment">OSPF Deployment</a> example</li>
+</ul></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+<hr>
+    <p>(C) 2023 Ivan Pepelnjak (ipSpace.net AG)</p>
+        </footer>
+        <script src="../js/jquery-3.6.0.min.js"></script>
+        <script src="../js/bootstrap.min.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

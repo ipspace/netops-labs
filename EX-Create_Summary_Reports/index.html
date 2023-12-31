@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <meta name="author" content="Ivan Pepelnjak, ipSpace.net AG">
+        <link rel="canonical" href="https://ipspace.github.io/netops-labs/EX-Create_Summary_Reports/">
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Easy Wins: Create Summary Reports - Network Automation</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">Network Automation</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="navitem">
+                                <a href=".." class="nav-link">Home</a>
+                            </li>
+                            <li class="dropdown active">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Challenges <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../EX-Build_Lab/" class="dropdown-item">Build Your Own Network Automation Lab</a>
+</li>
+                                    
+<li>
+    <a href="./" class="dropdown-item active">Easy Wins: Create Summary Reports</a>
+</li>
+                                    
+<li>
+    <a href="../EX-Create_Service_Data_Model/" class="dropdown-item">Data Models: Create a Service Data Model</a>
+</li>
+                                    
+<li>
+    <a href="../EX-Deploy_Network_Services/" class="dropdown-item">Deploy Network Services From a Data Model</a>
+</li>
+                                    
+<li>
+    <a href="../EX-Logging_Testing/" class="dropdown-item">Logging and Testing</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Extra <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../EX-Git_Recipe_Explained/" class="dropdown-item">Git Recipe Explained</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../EX-Build_Lab/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../EX-Create_Service_Data_Model/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3">
+<div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+  <div class="navbar-header">
+      <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+          <span class="fa fa-angle-down"></span>
+      </button>
+  </div>
+
+  
+  
+  
+  
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary"  style="margin-bottom: 1em;">
+      <ul class="nav flex-column">
+          
+      <li class="nav-item" data-level="1"><a href="#easy-wins-create-summary-reports" class="nav-link">Easy Wins: Create Summary Reports</a>
+        <ul class="nav flex-column">
+      <li class="nav-item" data-level="2"><a href="#simple-reports" class="nav-link">Simple Reports</a>
+        <ul class="nav flex-column">
+        </ul>
+      </li>
+      <li class="nav-item" data-level="2"><a href="#more-advanced-reports" class="nav-link">More Advanced Reports</a>
+        <ul class="nav flex-column">
+        </ul>
+      </li>
+      <li class="nav-item" data-level="2"><a href="#data-manipulations-and-interesting-templates" class="nav-link">Data Manipulations and Interesting Templates</a>
+        <ul class="nav flex-column">
+        </ul>
+      </li>
+      <li class="nav-item" data-level="2"><a href="#supporting-materials" class="nav-link">Supporting Materials</a>
+        <ul class="nav flex-column">
+        </ul>
+      </li>
+        </ul>
+      </li>
+      </ul>
+    </div>
+  
+  
+  <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+    <ul class="nav flex-column">
+        
+    
+        
+    
+    <li class="nav-item" data-level="">
+      
+        <a class="nav-link">Challenges</a>
+      
+      
+        <ul class="nav flex-column">
+    
+    <li class="nav-item" data-level="">
+      
+        <a href="../EX-Build_Lab/" class="nav-link">Build Your Own Network Automation Lab</a>
+      
+      
+    </li>
+    
+    
+    <li class="nav-item" data-level="">
+      
+        <a href="./" class="nav-link">Easy Wins: Create Summary Reports</a>
+      
+      
+    </li>
+    
+    
+    <li class="nav-item" data-level="">
+      
+        <a href="../EX-Create_Service_Data_Model/" class="nav-link">Data Models: Create a Service Data Model</a>
+      
+      
+    </li>
+    
+    
+    <li class="nav-item" data-level="">
+      
+        <a href="../EX-Deploy_Network_Services/" class="nav-link">Deploy Network Services From a Data Model</a>
+      
+      
+    </li>
+    
+    
+    <li class="nav-item" data-level="">
+      
+        <a href="../EX-Logging_Testing/" class="nav-link">Logging and Testing</a>
+      
+      
+    </li>
+    
+        </ul>
+      
+    </li>
+    
+        
+    
+    <li class="nav-item" data-level="">
+      
+        <a class="nav-link">Extra</a>
+      
+      
+        <ul class="nav flex-column">
+    
+    <li class="nav-item" data-level="">
+      
+        <a href="../EX-Git_Recipe_Explained/" class="nav-link">Git Recipe Explained</a>
+      
+      
+    </li>
+    
+        </ul>
+      
+    </li>
+    
+    </ul>
+  </div>
+
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="easy-wins-create-summary-reports">Easy Wins: Create Summary Reports</h1>
+<p>We’ll keep the first encounter with Ansible and Ansible playbooks simple: you’ll develop a playbook to collect information from your network and create a report based on the collected data.</p>
+<p>Regardless of what problem you decide to solve or how hard you want your task to be, you’ll probably follow these steps:</p>
+<ul>
+<li>Define the problem (what do you want to report)</li>
+<li>Figure out how to get the information from the network devices</li>
+<li>Define the report format</li>
+<li>Create and test the playbook that collects the information and generates the report</li>
+<li>Write documentation</li>
+<li>Publish your solution to your Github account.</li>
+</ul>
+<h2 id="simple-reports">Simple Reports</h2>
+<p>Assuming you’ve created the Ansible inventory file to solve the <a href="../EX-Build_Lab/">previous assignment</a>, your playbook doesn’t have to be more complex than this:</p>
+<ul>
+<li>Collect information from the host using SNMP (using <strong>snmp_facts</strong>), REST API, or CLI commands returning JSON format (example: <strong>nxos_command</strong> with <strong>output</strong> set to <strong>json</strong>), or device-specific facts (<strong>ios_facts</strong>, <strong>nxos_facts</strong>, <strong>junos_facts</strong>…). Using traditional CLI commands will make your job harder;</li>
+<li>Store the collected information in text files or create a summary report based on the information.</li>
+</ul>
+<p>Here are a few problems you could solve with this approach:</p>
+<ul>
+<li>Create a summary report listing device software version, uptime, memory utilization, interfaces, or IP addresses or subnets</li>
+<li>Collect MAC or ARP information from your devices and store it into text files (one per device) or use it to create a summary report.</li>
+<li>Create a hardware inventory report (assuming the devices you use in your lab return that information in an easy-to-use format).</li>
+<li>Verify that all devices in your network have DNS and NTP servers configured;</li>
+</ul>
+<h2 id="more-advanced-reports">More Advanced Reports</h2>
+<p>Here are a few ideas if you’re looking for a more challenging task:</p>
+<ul>
+<li>Parse CLI printouts in Ansible or Python filter, or use NAPALM or <code>ntc-ansible</code> modules to collect the information;</li>
+<li>Collect the list of IP addresses from devices, create a sorted list of subnets in your network, and list routers/interfaces/IP addresses in each subnet.</li>
+<li>Collect MAC and ARP information from your devices and create a summary report sorted by MAC addresses.</li>
+<li>Verify that all interfaces on which HSRP (or VRRP) is configured have an operational HSRP (or VRRP) neighbor.</li>
+</ul>
+<h2 id="data-manipulations-and-interesting-templates">Data Manipulations and Interesting Templates</h2>
+<p>If you want to practice your Jinja2 templating skills or try out data manipulation in Ansible, solve one of these challenges:</p>
+<ul>
+<li>Collect network topology using information from LLDP, OSPF, or BGP neighbors, and create a network diagram (hint: use GraphViz DOT or D2 file format);</li>
+<li>Collect device IP addresses and create DNS zone file and (advanced part) reverse DNS zone file.</li>
+</ul>
+<h2 id="supporting-materials">Supporting Materials</h2>
+<p>Useful tools:</p>
+<ul>
+<li><a href="http://jinja.quantprogramming.com/">Live Jinja2 parser/renderer</a> is a great way to get started</li>
+</ul>
+<p>You’ll probably find these videos from the <a href="https://my.ipspace.net/bin/list?id=AnsibleOC"><em>Ansible for Networking Engineers</em></a> materials useful:</p>
+<ul>
+<li>Baseline Ansible skills are covered in <a href="https://my.ipspace.net/bin/list?id=AnsibleOC#ANSIBLE"><em>Using Ansible</em></a> section (in particular the <em>Introduction to Ansible</em> and <em>Ansible Playbooks</em> videos).</li>
+<li>You might want to watch <em>working with files</em> video in <a href="https://my.ipspace.net/bin/list?id=AnsibleOC#ANSIBLE_DD"><em>Ansible Deeper Dive</em></a> section.</li>
+<li>The <a href="https://my.ipspace.net/bin/list?id=AnsibleOC#NET_CMD"><em>Ansible Networking Modules – Executing Commands</em></a> section describes Ansible modules you’ll use to gather data and various ways of collecting information from networking devices.</li>
+<li>If you want to generate a summary report from a template, you’ll have to be familiar with Jinja2 – watch the <a href="https://my.ipspace.net/bin/list?id=AnsibleOC#JINJA2"><em>Creating Templates with Jinja2</em></a> section.</li>
+<li>Jinja2 <a href="http://jinja.pocoo.org/docs/dev/templates/#whitespace-control">whitespace control</a> could get interestingly complicated - check out <a href="https://my.ipspace.net/bin/get/Ansible/J6%20-%20Whitespace%20Handling%20in%20Jinja2.mp4?doccode=AnsibleOC">whitespace handing in Jinja2</a>.</li>
+</ul></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+<hr>
+    <p>(C) 2023 Ivan Pepelnjak (ipSpace.net AG)</p>
+        </footer>
+        <script src="../js/jquery-3.6.0.min.js"></script>
+        <script src="../js/bootstrap.min.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

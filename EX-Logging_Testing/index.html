@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <meta name="author" content="Ivan Pepelnjak, ipSpace.net AG">
+        <link rel="canonical" href="https://ipspace.github.io/netops-labs/EX-Logging_Testing/">
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Logging and Testing - Network Automation</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">Network Automation</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="navitem">
+                                <a href=".." class="nav-link">Home</a>
+                            </li>
+                            <li class="dropdown active">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Challenges <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../EX-Build_Lab/" class="dropdown-item">Build Your Own Network Automation Lab</a>
+</li>
+                                    
+<li>
+    <a href="../EX-Create_Summary_Reports/" class="dropdown-item">Easy Wins: Create Summary Reports</a>
+</li>
+                                    
+<li>
+    <a href="../EX-Create_Service_Data_Model/" class="dropdown-item">Data Models: Create a Service Data Model</a>
+</li>
+                                    
+<li>
+    <a href="../EX-Deploy_Network_Services/" class="dropdown-item">Deploy Network Services From a Data Model</a>
+</li>
+                                    
+<li>
+    <a href="./" class="dropdown-item active">Logging and Testing</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Extra <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../EX-Git_Recipe_Explained/" class="dropdown-item">Git Recipe Explained</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../EX-Deploy_Network_Services/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../EX-Git_Recipe_Explained/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3">
+<div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+  <div class="navbar-header">
+      <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+          <span class="fa fa-angle-down"></span>
+      </button>
+  </div>
+
+  
+  
+  
+  
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary"  style="margin-bottom: 1em;">
+      <ul class="nav flex-column">
+          
+      <li class="nav-item" data-level="1"><a href="#logging-and-testing" class="nav-link">Logging and Testing</a>
+        <ul class="nav flex-column">
+      <li class="nav-item" data-level="2"><a href="#logging" class="nav-link">Logging</a>
+        <ul class="nav flex-column">
+        </ul>
+      </li>
+      <li class="nav-item" data-level="2"><a href="#unit-testing" class="nav-link">Unit Testing</a>
+        <ul class="nav flex-column">
+        </ul>
+      </li>
+      <li class="nav-item" data-level="2"><a href="#automate-unit-testing" class="nav-link">Automate Unit Testing</a>
+        <ul class="nav flex-column">
+        </ul>
+      </li>
+      <li class="nav-item" data-level="2"><a href="#validate-input-data" class="nav-link">Validate Input Data</a>
+        <ul class="nav flex-column">
+        </ul>
+      </li>
+      <li class="nav-item" data-level="2"><a href="#useful-links" class="nav-link">Useful Links</a>
+        <ul class="nav flex-column">
+        </ul>
+      </li>
+        </ul>
+      </li>
+      </ul>
+    </div>
+  
+  
+  <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+    <ul class="nav flex-column">
+        
+    
+        
+    
+    <li class="nav-item" data-level="">
+      
+        <a class="nav-link">Challenges</a>
+      
+      
+        <ul class="nav flex-column">
+    
+    <li class="nav-item" data-level="">
+      
+        <a href="../EX-Build_Lab/" class="nav-link">Build Your Own Network Automation Lab</a>
+      
+      
+    </li>
+    
+    
+    <li class="nav-item" data-level="">
+      
+        <a href="../EX-Create_Summary_Reports/" class="nav-link">Easy Wins: Create Summary Reports</a>
+      
+      
+    </li>
+    
+    
+    <li class="nav-item" data-level="">
+      
+        <a href="../EX-Create_Service_Data_Model/" class="nav-link">Data Models: Create a Service Data Model</a>
+      
+      
+    </li>
+    
+    
+    <li class="nav-item" data-level="">
+      
+        <a href="../EX-Deploy_Network_Services/" class="nav-link">Deploy Network Services From a Data Model</a>
+      
+      
+    </li>
+    
+    
+    <li class="nav-item" data-level="">
+      
+        <a href="./" class="nav-link">Logging and Testing</a>
+      
+      
+    </li>
+    
+        </ul>
+      
+    </li>
+    
+        
+    
+    <li class="nav-item" data-level="">
+      
+        <a class="nav-link">Extra</a>
+      
+      
+        <ul class="nav flex-column">
+    
+    <li class="nav-item" data-level="">
+      
+        <a href="../EX-Git_Recipe_Explained/" class="nav-link">Git Recipe Explained</a>
+      
+      
+    </li>
+    
+        </ul>
+      
+    </li>
+    
+    </ul>
+  </div>
+
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="logging-and-testing">Logging and Testing</h1>
+<p>In this assignment, you’ll add two testing features to the <a href="../EX-Create_Service_Data_Model/">project you created in the previous assignment</a>:</p>
+<ul>
+<li>Logging of configuration change results,</li>
+<li>Unit tests of a single component.</li>
+</ul>
+<p>Optional components:</p>
+<ul>
+<li>Automate unit testing;</li>
+<li>Validate input data.</li>
+</ul>
+<h2 id="logging">Logging</h2>
+<p>Add tasks in your playbooks that will log results returned by every interaction with the networking devices (for example, results returned by every <strong>ios_config</strong> or <strong>ios_command</strong> task).</p>
+<p>Make logging conditional – the results should be logged only when an Ansible variable is set.</p>
+<p><strong>Optional:</strong> Assign a unique ID (example: timestamp) to every playbook run and store logging data for each playbook run in a dedicated subdirectory. This will allow you to examine potential playbook failures even when someone has rerun the playbooks.</p>
+<h2 id="unit-testing">Unit Testing</h2>
+<ul>
+<li>Choose a single component of your project (generating device configurations, transforming the data model…).</li>
+<li>Create numerous test scenarios with valid and invalid input data.</li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>The easiest way to create test scenarios for a component is to store Ansible facts into a YAML or JSON file just before that component is executed in your playbook and then create multiple variants of the input data.</p>
+</div>
+<ul>
+<li>Create a test harness for your component. It can be as easy as &ldquo;read variables for the test scenario, execute the component, save the results.&rdquo;</li>
+<li>Test your component and verify it returns the expected results under all input conditions.</li>
+</ul>
+<h2 id="automate-unit-testing">Automate Unit Testing</h2>
+<ul>
+<li>Create expected results for all unit tests you created in the previous step. Expected results might be a dump of Ansible variables or a text file with well-known content (for example, device configuration)</li>
+<li>Create a playbook (or a <strong>bash</strong> script) that will automatically execute all unit tests for your component and compare actual results with expected results</li>
+</ul>
+<p><strong>Hints:</strong></p>
+<ul>
+<li>Use <strong>yamllint</strong> to verify your YAML data is well-formatted</li>
+<li>Use <strong>diff</strong> called with <strong>shell</strong> module to compare text files</li>
+<li>Use <strong>jq</strong> to <a href="http://stackoverflow.com/questions/31930041/using-jq-or-alternative-command-line-tools-to-diff-json-files">compare JSON documents</a>.</li>
+</ul>
+<h2 id="validate-input-data">Validate Input Data</h2>
+<p>Use <a href="https://en.wikipedia.org/wiki/Test-driven_development">test-driven development approach</a> in this step:</p>
+<ul>
+<li>Identify all potential errors in your input data.</li>
+<li>Create unit tests for the data validation component – variants of input data with one or more errors. Start by introducing a single error in every unit test.</li>
+<li>Create a test harness for the data validation component and a playbook or <strong>bash</strong> script that automates the unit tests.</li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>My test harness is a full-blown Ansible playbook, and as I couldn’t get it to work from within another Ansible playbook (using the <strong>shell</strong> module), I created a <strong>bash</strong> script to automate the unit tests.</p>
+</div>
+<p>After creating the environment:</p>
+<ul>
+<li>Add code that will detect one of the potential input errors.</li>
+<li>Execute unit tests to verify that your code detects the error.</li>
+<li>Repeat as long as feasible. Some errors (for example, duplicate composite keys) are notoriously hard to detect without writing a Python plug-in.</li>
+</ul>
+<h2 id="useful-links">Useful Links</h2>
+<p>Explore the <a href="https://github.com/ipspace/VLAN-service/tree/Logging">Logging</a> and <a href="https://github.com/ipspace/VLAN-service/tree/VLAN_PreDeploy_Check">Pre-deploy check</a> branches of the <a href="https://github.com/ipspace/VLAN-service/">VLAN services project</a>.</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+<hr>
+    <p>(C) 2023 Ivan Pepelnjak (ipSpace.net AG)</p>
+        </footer>
+        <script src="../js/jquery-3.6.0.min.js"></script>
+        <script src="../js/bootstrap.min.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

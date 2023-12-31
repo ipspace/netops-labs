@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <meta name="author" content="Ivan Pepelnjak, ipSpace.net AG">
+        <link rel="canonical" href="https://ipspace.github.io/netops-labs/EX-Git_Recipe_Explained/">
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Git Recipe Explained - Network Automation</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">Network Automation</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="navitem">
+                                <a href=".." class="nav-link">Home</a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Challenges <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../EX-Build_Lab/" class="dropdown-item">Build Your Own Network Automation Lab</a>
+</li>
+                                    
+<li>
+    <a href="../EX-Create_Summary_Reports/" class="dropdown-item">Easy Wins: Create Summary Reports</a>
+</li>
+                                    
+<li>
+    <a href="../EX-Create_Service_Data_Model/" class="dropdown-item">Data Models: Create a Service Data Model</a>
+</li>
+                                    
+<li>
+    <a href="../EX-Deploy_Network_Services/" class="dropdown-item">Deploy Network Services From a Data Model</a>
+</li>
+                                    
+<li>
+    <a href="../EX-Logging_Testing/" class="dropdown-item">Logging and Testing</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown active">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Extra <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="./" class="dropdown-item active">Git Recipe Explained</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../EX-Logging_Testing/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" class="nav-link disabled">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3">
+<div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+  <div class="navbar-header">
+      <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+          <span class="fa fa-angle-down"></span>
+      </button>
+  </div>
+
+  
+  
+  
+  
+  
+  <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+    <ul class="nav flex-column">
+        
+    
+        
+    
+    <li class="nav-item" data-level="">
+      
+        <a class="nav-link">Challenges</a>
+      
+      
+        <ul class="nav flex-column">
+    
+    <li class="nav-item" data-level="">
+      
+        <a href="../EX-Build_Lab/" class="nav-link">Build Your Own Network Automation Lab</a>
+      
+      
+    </li>
+    
+    
+    <li class="nav-item" data-level="">
+      
+        <a href="../EX-Create_Summary_Reports/" class="nav-link">Easy Wins: Create Summary Reports</a>
+      
+      
+    </li>
+    
+    
+    <li class="nav-item" data-level="">
+      
+        <a href="../EX-Create_Service_Data_Model/" class="nav-link">Data Models: Create a Service Data Model</a>
+      
+      
+    </li>
+    
+    
+    <li class="nav-item" data-level="">
+      
+        <a href="../EX-Deploy_Network_Services/" class="nav-link">Deploy Network Services From a Data Model</a>
+      
+      
+    </li>
+    
+    
+    <li class="nav-item" data-level="">
+      
+        <a href="../EX-Logging_Testing/" class="nav-link">Logging and Testing</a>
+      
+      
+    </li>
+    
+        </ul>
+      
+    </li>
+    
+        
+    
+    <li class="nav-item" data-level="">
+      
+        <a class="nav-link">Extra</a>
+      
+      
+        <ul class="nav flex-column">
+    
+    <li class="nav-item" data-level="">
+      
+        <a href="./" class="nav-link">Git Recipe Explained</a>
+      
+      
+    </li>
+    
+        </ul>
+      
+    </li>
+    
+    </ul>
+  </div>
+
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="git-recipe-explained">Git Recipe Explained</h1>
+<p>Git is a complex tool, so most novices <a href="https://xkcd.com/1597/">try to cheat their way through</a> with arcane recipes.</p>
+<p>As it&rsquo;s always better to <a href="http://blog.ipspace.net/2008/09/knowledge-or-recipes.html">understand what you&rsquo;re doing</a> instead of a <a href="http://blog.ipspace.net/2011/08/road-to-complex-designs-is-paved-with.html">google-and-paste approach</a>, let&rsquo;s analyze a pretty common one. Use it to <a href="../EX-Build_Lab/">describe your network automation lab</a>.</p>
+<pre><code>git init
+</code></pre>
+<p>Git tracks changes you make in a distributed, eventually consistent database implemented with many small files in the <code>.git</code> directory. <strong>git init</strong> initializes that database within the .git subdirectory of the current directory. Use it in an empty directory you plan to use for your project.</p>
+<pre><code>git remote add origin https://github.com/username/repository
+</code></pre>
+<p>Git can synchronize the local database with multiple remote databases (repositories). Remote repositories are added with the <strong>git remote add</strong> command that <a href="https://git-scm.com/docs/git-remote">takes at least two arguments</a>:</p>
+<ul>
+<li>The nickname of the remote repository;</li>
+<li>The URI to access the remote repository.</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The remote repository must exist before you run the <strong>git remote add</strong> command. For example, you must create a GitHub repository first, then do <strong>git remote add</strong> in an empty folder where you executed <strong>git init</strong>.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<ul>
+<li>The URI <strong>git</strong> uses to access a remote repository can use non-HTTP(S) methods, such as SSH.</li>
+<li>All recipes call the remote repository <strong>origin</strong> (the default value), but you can give it any descriptive name, for example <strong>git remote add github <em>url</em></strong>.</li>
+</ul>
+</div>
+<pre><code>git branch -M main
+</code></pre>
+<p>In the old days, the initial Git branch was called the <strong>master</strong> branch. The Politically Correct movement forced numerous Git-based platforms to change the name of the initial branch to <strong>main</strong>. While I don&rsquo;t care how that branch is called, the <strong>git</strong> CLI tool does not necessarily share that sentiment, leaving you with an inconsistent branch naming scheme.</p>
+<p>If you need to rename the local branch, use the <strong>git branch -M <em>new_name</em></strong> command. For example, the above command accommodates a remote Git platform that insists on naming its most initial branch <strong>main</strong>.</p>
+<pre><code>echo &quot;# netops-labs&quot; &gt;&gt; README.md  # or windows equivalent
+</code></pre>
+<p>They wanted to say <em>make the changes you want to make</em>, but that would be too obvious.</p>
+<pre><code>git add some_file.text    # or 'git add .' for all
+</code></pre>
+<p><strong>git add</strong> adds a snapshot of the specified files to the <a href="http://softwareengineering.stackexchange.com/questions/119782/what-does-stage-mean-in-git"><em>staging area</em></a> (prepares them for commit). If needed, remove the files from the staging area (<strong>git status</strong> will tell you how) or replace them with newer versions with another <strong>git add</strong> command without modifying <strong>git</strong> repositories.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>To see which files have been modified (or haven&rsquo;t been added to the git database yet), use the <strong>git status</strong> command.</p>
+</div>
+<pre><code>git commit -m 'a comment'
+</code></pre>
+<p><strong>git commit</strong> saves (commits) the changes from the staging area to the local repository. You can specify the commit message in the –m parameter or use a text editor to write a longer message.</p>
+<pre><code>git push -u origin main
+</code></pre>
+<p><strong>git push</strong> synchronizes the changes made in the local repository with a remote repository. Git keeps a mapping between local branches and remote branches so that you can use <strong>git push</strong> with no extra parameters to push changes to the remote repository. However, when you push changes for the first time, you have to specify the remote repository (<strong>origin</strong>) and remote branch (<strong>main</strong>), and tell Git that you want to create a new local-to-remote mapping with the <code>-u</code> or <code>--set-upstream</code> parameter.</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+<hr>
+    <p>(C) 2023 Ivan Pepelnjak (ipSpace.net AG)</p>
+        </footer>
+        <script src="../js/jquery-3.6.0.min.js"></script>
+        <script src="../js/bootstrap.min.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
